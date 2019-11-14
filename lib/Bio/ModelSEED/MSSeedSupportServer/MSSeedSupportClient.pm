@@ -12,7 +12,17 @@ eval {
     $get_time = sub { Time::HiRes::gettimeofday() };
 };
 
-use Bio::KBase::AuthToken;
+our $AuthTokenClass;
+eval {
+    require Bio::KBase::AuthToken;
+    $AuthTokenClass = 'Bio::KBase::AuthToken';
+};
+eval {
+    require P3AuthToken;
+    $AuthTokenClass = 'P3AuthToken';
+};
+
+
 
 # Client version should match Impl version
 # This is a Semantic Version number,
@@ -89,7 +99,7 @@ sub new
     # We create an auth token, passing through the arguments that we were (hopefully) given.
 
     {
-	my $token = Bio::KBase::AuthToken->new(@args);
+	my $token = $AuthTokenClass->new(@args);
 	
 	if (!$token->error_message)
 	{
