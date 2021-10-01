@@ -102,7 +102,7 @@ deploy-service-scripts:
 deploy-mfatoolkit:
 	$(MAKE) -C MFAToolkit
 	cp MFAToolkit/bin/mfatoolkit $(TARGET)/bin/
-	if [ ! -e $(TARGET)/bin/scip ] ; then wget http://bioseed.mcs.anl.gov/~chenry/KbaseFiles/scip ; mv scip $(TARGET)/bin/ ; fi
+	if [ ! -e $(TARGET)/bin/scip ] ; then wget --no-check-certificate http://bioseed.mcs.anl.gov/~chenry/KbaseFiles/scip ; mv scip $(TARGET)/bin/ ; fi
 	if [ ! -d $(TARGET)/etc/ ] ; then mkdir $(TARGET)/etc ; fi
 	if [ ! -d $(TARGET)/etc/MFAToolkit ] ; then mkdir $(TARGET)/etc/MFAToolkit ; fi
 	cp MFAToolkit/etc/MFAToolkit/* $(TARGET)/etc/MFAToolkit/
